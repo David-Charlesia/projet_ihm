@@ -17,4 +17,9 @@ public class Cercle extends Figure
   {
     this.rayon=rayon;
   }
+
+  public String type()
+  {
+    return "Cercle";
+  }
 }

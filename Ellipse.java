@@ -18,4 +18,9 @@ public class Ellipse extends Cercle
     this.rayon2=rayon2;
   }
 
+  public String type()
+  {
+    return "Ellipse";
+  }
+
 }

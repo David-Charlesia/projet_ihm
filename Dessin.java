@@ -1,11 +1,11 @@
 import java.io.*;
 import java.util.*;
 
-public class Dessein extends java.util.ArrayList<Figure>
+public class Dessin extends java.util.ArrayList<Figure>
 {
   private String nom;
 
-  public Dessein(String nom)
+  public Dessin(String nom)
   {
     this.nom=nom;
   }

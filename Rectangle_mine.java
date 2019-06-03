@@ -1,9 +1,9 @@
-public class Rectangle extends Figure
+public class Rectangle_mine extends Figure
 {
   private Point p1;
   private Point p2;
 
-  public Rectangle(int x,int y,int rotation,int p1_x,int p1_y,int p2_x,int p2_y,boolean plein)
+  public Rectangle_mine(int x,int y,int rotation,int p1_x,int p1_y,int p2_x,int p2_y,boolean plein)
   {
     super(x,y,rotation,plein);
     this.p1=new Point(p1_x,p1_y);
@@ -30,6 +30,11 @@ public class Rectangle extends Figure
   {
     this.p2.set_x(x);
     this.p2.set_y(y);
+  }
+
+  public String type()
+  {
+    return "Rectangle";
   }
 
 }

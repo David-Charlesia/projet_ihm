@@ -52,4 +52,9 @@ public class Figure
   {
     this.plein=plein;
   }
+
+  public String type()
+  {
+    return "Figure";
+  }
 }

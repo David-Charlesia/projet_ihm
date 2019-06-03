@@ -28,4 +28,9 @@ public class Point
   {
     this.y=y;
   }
+
+  public String type()
+  {
+    return "Point";
+  }
 }

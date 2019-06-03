@@ -44,4 +44,9 @@ public class Triangle extends Figure
     this.p3.set_x(x);
     this.p3.set_y(y);
   }
+
+  public String type()
+  {
+    return "Triangle";
+  }
 }

@@ -5,5 +5,8 @@ public class Segment extends Rectangle
     super(x,y,rotation,p1_x,p1_y,p2_x,p2_y,false);
   }
 
-  
+  public String type()
+  {
+    return "Segment";
+  }
 }
