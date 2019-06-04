@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JOptionPane;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 public class Fenetre extends JFrame
 {
@@ -30,11 +32,14 @@ public class Fenetre extends JFrame
     this.setLayout(new BorderLayout());
     this.add(this.getPanelSud(),BorderLayout.SOUTH);
     this.add(new Vue (dessin),BorderLayout.CENTER);
+    CurseurListener mlis=new CurseurListener();
+    this.addMouseListener(mlis);
   }
 
   public JPanel getPanelSud()
   {
     JPanel jp=new JPanel();
+    //addMouseListener(new MouseAdapter());
     BoutonListener blis=new BoutonListener();
 
     JButton c=new JButton("Cercle");
@@ -43,7 +48,13 @@ public class Fenetre extends JFrame
     return jp;
   }
 
-
+  class CurseurListener extends MouseAdapter
+  {
+    public void mouseClicked(MouseEvent e)
+    {
+      System.out.println("Clic !");
+    }
+  }
 
   class BoutonListener implements ActionListener
   {
