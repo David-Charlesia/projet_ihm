@@ -13,6 +13,9 @@ import java.awt.event.MouseEvent;
 public class Fenetre extends JFrame
 {
   private Dessin dessin;
+  private String forme;
+  private int x;
+  private int y;
 
   public Fenetre(Dessin dessin)
   {
@@ -52,7 +55,21 @@ public class Fenetre extends JFrame
   {
     public void mouseClicked(MouseEvent e)
     {
-      System.out.println("Clic !");
+      x=e.getX();
+      y=e.getY();
+      if(forme!=null)
+      {
+        switch(forme)
+        {
+          case "Cercle":
+          //get info rayon popup
+            dessin.add(new Cercle(x,y,0,30,false));
+            forme=null;
+            initialise();
+            repaint();
+        }
+      }
+
     }
   }
 
@@ -61,12 +78,8 @@ public class Fenetre extends JFrame
     public void actionPerformed(ActionEvent e)
     {
       String commande=e.getActionCommand();
+      forme=commande;
 
-      switch(commande)
-      {
-        case "Cercle":
-          
-      }
     }
   }
 
