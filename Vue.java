@@ -39,7 +39,7 @@ public class Vue extends JPanel
           int y=c.get_y();
           int rayon=c.get_rayon();
 
-          g.drawOval(x,y,rayon*2,rayon*2);
+          g.drawOval(x-rayon,y-rayon*2,rayon*2,rayon*2);
           break;
       }
     }

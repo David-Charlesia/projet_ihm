@@ -67,6 +67,7 @@ public class Fenetre extends JFrame
             forme=null;
             initialise();
             repaint();
+            break;
         }
       }
 
@@ -79,7 +80,6 @@ public class Fenetre extends JFrame
     {
       String commande=e.getActionCommand();
       forme=commande;
-
     }
   }
 
