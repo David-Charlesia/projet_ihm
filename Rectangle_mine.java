@@ -1,35 +1,22 @@
 public class Rectangle_mine extends Figure
 {
-  private Point p1;
-  private Point p2;
+  private Point p;
 
-  public Rectangle_mine(int x,int y,int rotation,int p1_x,int p1_y,int p2_x,int p2_y,boolean plein)
+  public Rectangle_mine(int x,int y,int rotation,int p_x,int p_y,boolean plein)
   {
     super(x,y,rotation,plein);
-    this.p1=new Point(p1_x,p1_y);
-    this.p2=new Point(p2_x,p2_y);
+    this.p=new Point(p_x,p_y);
   }
 
-  public Point get_p1()
+  public Point get_p()
   {
-    return this.p1;
+    return this.p;
   }
 
-  public void set_p1(int x, int y)
+  public void set_p(int x, int y)
   {
-    this.p1.set_x(x);
-    this.p1.set_y(y);
-  }
-
-  public Point get_p2()
-  {
-    return this.p2;
-  }
-
-  public void set_p2(int x, int y)
-  {
-    this.p2.set_x(x);
-    this.p2.set_y(y);
+    this.p.set_x(x);
+    this.p.set_y(y);
   }
 
   public String type()
