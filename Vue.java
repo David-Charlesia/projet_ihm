@@ -98,6 +98,11 @@ public class Vue extends JPanel
           Ellipse e=(Ellipse)fig;
           g.drawOval(e.get_x(),e.get_y(),e.get_rayon(),e.get_rayon2());
           break;
+
+        case "Segment":
+          Segment s=(Segment)fig;
+          g.drawLine(x,y,s.get_p().get_x(),s.get_p().get_y());
+          break;
       }
     }
   }

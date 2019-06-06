@@ -34,7 +34,26 @@ public class Fenetre extends JFrame
 
     this.dessin=dessin;
     //this.getContentPane().add(new Vue (dessin));
-    this.setSize(600, 400);
+    //this.getContentPane().setPreferredSize(600,400);
+    int f_width=600;
+    int f_height=400;
+
+    this.setSize(f_width,f_height);
+    /*
+    Dimension actualSize = this.getContentPane().getSize();
+
+    int extraW = f_width - actualSize.width;
+    int extraH = f_height - actualSize.height;
+
+    // Now set the size.
+    this.setSize(f_width + extraW, f_height + extraH);
+
+    System.out.println(f_width+" "+f_height);
+    System.out.println(extraW+" "+extraH);
+    System.out.println(f_width + extraW+" "+f_height + extraH);
+    */
+
+    //this.pack();
     this.initialise();
     this.setVisible(true);
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -66,9 +85,9 @@ public class Fenetre extends JFrame
     //addMouseListener(new MouseAdapter());
     BoutonListener blis=new BoutonListener();
 
-    JButton c=new JButton("Cercle");
-    c.addActionListener(blis);
-    jp.add(c);
+    JButton s=new JButton("Segment");
+    s.addActionListener(blis);
+    jp.add(s);
 
     JButton r=new JButton("Rectangle");
     r.addActionListener(blis);
@@ -77,6 +96,10 @@ public class Fenetre extends JFrame
     JButton t=new JButton("Triangle");
     t.addActionListener(blis);
     jp.add(t);
+
+    JButton c=new JButton("Cercle");
+    c.addActionListener(blis);
+    jp.add(c);
 
     JButton e=new JButton("Ellipse");
     e.addActionListener(blis);
@@ -162,6 +185,21 @@ public class Fenetre extends JFrame
               rayon2=y-old_y;
 
               dessin.add(new Ellipse(old_x,old_y,0,rayon,rayon2,false));
+              first_clic=false;
+              forme=null;
+              actualiser();
+            }
+            break;
+
+          case "Segment":
+            if(!first_clic)
+            {
+              old_x=x;
+              old_y=y;
+              first_clic=true;
+            }else
+            {
+              dessin.add(new Segment(old_x,old_y,0,x,y));
               first_clic=false;
               forme=null;
               actualiser();
