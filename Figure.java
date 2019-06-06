@@ -15,58 +15,29 @@ public class Figure
     this.vue=new Dessin_Figure(this);
   }
 
-  public int get_x()
-  {
-    return this.x;
-  }
+  public int get_x(){return this.x;}
 
-  public void set_x(int x)
-  {
-    this.x=x;
-  }
+  public void set_x(int x){this.x=x;}
 
-  public int get_y()
-  {
-    return this.y;
-  }
+  public int get_y(){return this.y;}
 
-  public void set_y(int y)
-  {
-    this.y=y;
-  }
+  public void set_y(int y){this.y=y;}
 
-  public double getRotation()
-  {
-    return this.rotation;
-  }
+  public double getRotation(){return this.rotation;}
 
-  public void setRotation(int rotation)
-  {
-    this.rotation=rotation;
-  }
+  public void setRotation(int rotation){this.rotation=rotation;}
 
-  public boolean get_plein()
-  {
-    return this.plein;
-  }
+  public boolean get_plein(){return this.plein;}
 
-  public void set_plein(boolean plein)
-  {
-    this.plein=plein;
-  }
+  public void set_plein(boolean plein){this.plein=plein;}
 
-  public String type()
-  {
-    return "Figure";
-  }
+  public String type(){return "Figure";}
 
-  public int get_rayon()
-  {
-    return 0;
-  }
+  public int get_rayon(){return 0;}
 
-  public int get_rayon2()
-  {
-    return 0;
-  }
+  public int get_rayon2(){return 0;}
+
+  public Point get_p(){return null;}
+
+  public void set_p(int x, int y){}
 }
