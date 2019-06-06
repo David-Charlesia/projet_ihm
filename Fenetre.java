@@ -17,8 +17,11 @@ public class Fenetre extends JFrame
   private int x;
   private int y;
   private boolean first_clic=false;
+  private boolean second_clic=false;
   private int old_x;
   private int old_y;
+  private int old_x_2;
+  private int old_y_2;
   private Vue zone;
   private JPanel jp;
   private int height_frame;
@@ -68,6 +71,10 @@ public class Fenetre extends JFrame
     JButton r=new JButton("Rectangle");
     r.addActionListener(blis);
     jp.add(r);
+
+    JButton t=new JButton("Triangle");
+    t.addActionListener(blis);
+    jp.add(t);
   }
 
   class CurseurListener extends MouseAdapter
@@ -111,6 +118,27 @@ public class Fenetre extends JFrame
               System.out.println("2) x="+x+" y="+y);
               dessin.add(new Rectangle_mine(old_x,old_y,0,x,y,false));
               first_clic=false;
+              forme=null;
+              actualiser();
+            }
+            break;
+
+          case "Triangle":
+            if(!first_clic)
+            {
+              old_x=x;
+              old_y=y;
+              first_clic=true;
+            }else if(!second_clic)
+            {
+              old_x_2=x;
+              old_y_2=y;
+              second_clic=true;
+            }else
+            {
+              dessin.add(new Triangle(old_x,old_y,0,old_x_2,old_y_2,x,y,false));
+              first_clic=false;
+              second_clic=false;
               forme=null;
               actualiser();
             }
