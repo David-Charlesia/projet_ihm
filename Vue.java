@@ -93,6 +93,11 @@ public class Vue extends JPanel
           Triangle t=(Triangle)fig;
           g.drawPolygon(get_x_triangle(t),get_y_triangle(t),3);
           break;
+
+        case "Ellipse":
+          Ellipse e=(Ellipse)fig;
+          g.drawOval(e.get_x(),e.get_y(),e.get_rayon(),e.get_rayon2());
+          break;
       }
     }
   }

@@ -22,6 +22,8 @@ public class Fenetre extends JFrame
   private int old_y;
   private int old_x_2;
   private int old_y_2;
+  private int rayon;
+  private int rayon2;
   private Vue zone;
   private JPanel jp;
   private int height_frame;
@@ -75,6 +77,10 @@ public class Fenetre extends JFrame
     JButton t=new JButton("Triangle");
     t.addActionListener(blis);
     jp.add(t);
+
+    JButton e=new JButton("Ellipse");
+    e.addActionListener(blis);
+    jp.add(e);
   }
 
   class CurseurListener extends MouseAdapter
@@ -139,6 +145,24 @@ public class Fenetre extends JFrame
               dessin.add(new Triangle(old_x,old_y,0,old_x_2,old_y_2,x,y,false));
               first_clic=false;
               second_clic=false;
+              forme=null;
+              actualiser();
+            }
+            break;
+
+          case "Ellipse":
+            if(!first_clic)
+            {
+              old_x=x;
+              old_y=y;
+              first_clic=true;
+            }else
+            {
+              rayon=x-old_x;
+              rayon2=y-old_y;
+
+              dessin.add(new Ellipse(old_x,old_y,0,rayon,rayon2,false));
+              first_clic=false;
               forme=null;
               actualiser();
             }
