@@ -13,7 +13,7 @@ public class Test
 
     //dessin.add(new Cercle(60,65,0,30,false));
 
-    dessin.add(new Rectangle_mine(5,5,0,40,50,false));
+    dessin.add(new Cercle(40,40,0,40,false));
 
     /*
     JFrame frame= new JFrame("Test");

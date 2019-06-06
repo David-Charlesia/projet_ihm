@@ -54,21 +54,23 @@ public class Vue extends JPanel
     while(ite.hasNext())
     {
       fig=ite.next();
-      type=fig.type();
+      fig.vue.dessin(g,fig);
+      /*type=fig.type();
       x=fig.get_x();
-      y=fig.get_y();
+      y=fig.get_y();*/
 
+      /*
       switch(type)
       {
         case "Cercle":
           Cercle c=(Cercle)fig;
           int rayon=c.get_rayon();
-
           g.drawOval(x-rayon,y-rayon*2,rayon*2,rayon*2);
           break;
 
         case "Rectangle":
           Rectangle_mine r=(Rectangle_mine)fig;
+          System.out.println(x+" "+y);
           width=r.get_p().get_x()-x;
           height=r.get_p().get_y()-y;
           if(width<0)
@@ -83,8 +85,6 @@ public class Vue extends JPanel
             y=Math.abs(height);
             height=temp_y;
           }
-
-
           //System.out.println("x="+x+" y="+y+" width="+width+" height="+height);
           g.drawRect(x,y,width,height);
           break;
@@ -103,7 +103,7 @@ public class Vue extends JPanel
           Segment s=(Segment)fig;
           g.drawLine(x,y,s.get_p().get_x(),s.get_p().get_y());
           break;
-      }
+      }*/
     }
   }
 }

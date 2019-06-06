@@ -5,6 +5,7 @@ public class Cercle extends Figure
   public Cercle(int x,int y,double rotation,int rayon,boolean plein)
   {
     super(x,y,rotation,plein);
+    this.vue=new Dessin_Cercle(this);
     this.rayon=rayon;
   }
 

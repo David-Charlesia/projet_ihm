@@ -4,6 +4,7 @@ public class Figure
   private boolean plein;
   private int x;
   private int y;
+  public Dessin_Figure vue;
 
   public Figure(int x,int y,double rotation,boolean plein)
   {
@@ -11,6 +12,7 @@ public class Figure
     this.y=y;
     this.plein=plein;
     this.rotation=rotation;
+    this.vue=new Dessin_Figure(this);
   }
 
   public int get_x()
@@ -56,5 +58,15 @@ public class Figure
   public String type()
   {
     return "Figure";
+  }
+
+  public int get_rayon()
+  {
+    return 0;
+  }
+
+  public int get_rayon2()
+  {
+    return 0;
   }
 }
