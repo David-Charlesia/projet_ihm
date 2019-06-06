@@ -5,6 +5,7 @@ public class Ellipse extends Cercle
   public Ellipse(int x,int y,double rotation,int rayon,int rayon2,boolean plein)
   {
     super(x,y,rotation,rayon,plein);
+    this.vue=new Dessin_Ellipse(this);
     this.rayon2=rayon2;
   }
 
