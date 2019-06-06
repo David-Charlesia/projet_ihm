@@ -5,8 +5,8 @@ public class Rectangle_mine extends Figure
   public Rectangle_mine(int x,int y,int rotation,int p_x,int p_y,boolean plein)
   {
     super(x,y,rotation,plein);
-    this.vue=new Dessin_Rectangle(this);
     this.p=new Point(p_x,p_y);
+    this.vue=new Dessin_Rectangle(this);
   }
 
   public Point get_p()

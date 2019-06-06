@@ -13,7 +13,8 @@ public class Test
 
     //dessin.add(new Cercle(60,65,0,30,false));
 
-    dessin.add(new Cercle(40,40,0,40,false));
+    //dessin.add(new Cercle(40,40,0,40,false));
+    //dessin.add(new Triangle(40,40,0,90,90,30,30,false));
 
     /*
     JFrame frame= new JFrame("Test");

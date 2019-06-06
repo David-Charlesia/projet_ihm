@@ -165,7 +165,9 @@ public class Fenetre extends JFrame
               second_clic=true;
             }else
             {
+              System.out.println(x+" "+y);
               dessin.add(new Triangle(old_x,old_y,0,old_x_2,old_y_2,x,y,false));
+              System.out.println("Yeah");
               first_clic=false;
               second_clic=false;
               forme=null;

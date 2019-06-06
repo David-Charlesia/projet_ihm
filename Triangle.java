@@ -8,6 +8,7 @@ public class Triangle extends Figure
     super(x,y,rotation,plein);
     this.p1=new Point(p1_x,p1_y);
     this.p2=new Point(p2_x,p2_y);
+    this.vue=new Dessin_Triangle(this);
   }
 
   public Point get_p1()
@@ -30,6 +31,28 @@ public class Triangle extends Figure
   {
     this.p2.set_x(x);
     this.p2.set_y(y);
+  }
+
+  public int[] get_x_triangle(Figure t)
+  {
+    int[] tab=new int[3];
+
+    tab[0]=t.get_p1().get_x();
+    tab[1]=t.get_p2().get_x();
+    tab[2]=t.get_x();
+
+    return tab;
+  }
+
+  public int[] get_y_triangle(Figure t)
+  {
+    int[] tab=new int[3];
+
+    tab[0]=t.get_p1().get_y();
+    tab[1]=t.get_p2().get_y();
+    tab[2]=t.get_y();
+
+    return tab;
   }
 
   public String type()

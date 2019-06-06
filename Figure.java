@@ -40,4 +40,12 @@ public class Figure
   public Point get_p(){return null;}
 
   public void set_p(int x, int y){}
+
+  public int[] get_x_triangle(Figure t){return null;}
+
+  public int[] get_y_triangle(Figure t){return null;}
+
+  public Point get_p1(){return null;}
+
+  public Point get_p2(){return null;}
 }
