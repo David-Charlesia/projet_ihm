@@ -1,16 +1,20 @@
+import java.awt.Color;
 public class Figure
 {
   private double rotation;
   private boolean plein;
+  private Color color;
   private int x;
   private int y;
   public Dessin_Figure vue;
 
-  public Figure(int x,int y,double rotation,boolean plein)
+
+  public Figure(int x,int y,double rotation,boolean plein,Color color)
   {
     this.x=x;
     this.y=y;
     this.plein=plein;
+    this.color=color;
     this.rotation=rotation;
     this.vue=new Dessin_Figure(this);
   }
@@ -48,4 +52,20 @@ public class Figure
   public Point get_p1(){return null;}
 
   public Point get_p2(){return null;}
+
+  public Color get_color()
+  {
+    if(this.color!=null)
+    {
+      return this.color;
+    }else
+    {
+      return null;
+    }
+  }
+
+  public void set_color(Color color)
+  {
+    this.color=color;
+  }
 }

@@ -1,10 +1,11 @@
+import java.awt.Color;
 public class Ellipse extends Cercle
 {
   private int rayon2;
 
-  public Ellipse(int x,int y,double rotation,int rayon,int rayon2,boolean plein)
+  public Ellipse(int x,int y,double rotation,int rayon,int rayon2,boolean plein,Color color)
   {
-    super(x,y,rotation,rayon,plein);
+    super(x,y,rotation,rayon,plein,color);
     this.vue=new Dessin_Ellipse(this);
     this.rayon2=rayon2;
   }

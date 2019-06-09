@@ -1,11 +1,12 @@
+import java.awt.Color;
 public class Triangle extends Figure
 {
   private Point p1;
   private Point p2;
 
-  public Triangle(int x,int y,int rotation,int p1_x,int p1_y,int p2_x,int p2_y,boolean plein)
+  public Triangle(int x,int y,int rotation,int p1_x,int p1_y,int p2_x,int p2_y,boolean plein,Color color)
   {
-    super(x,y,rotation,plein);
+    super(x,y,rotation,plein,color);
     this.p1=new Point(p1_x,p1_y);
     this.p2=new Point(p2_x,p2_y);
     this.vue=new Dessin_Triangle(this);

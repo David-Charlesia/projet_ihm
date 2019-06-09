@@ -9,9 +9,13 @@ import java.awt.event.*;
 import javax.swing.JOptionPane;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.JTabbedPane;
 
 public class Fenetre extends JFrame
 {
+  private JPanel general;
   private Dessin dessin;
   private String forme;
   private int x;
@@ -27,6 +31,14 @@ public class Fenetre extends JFrame
   private Vue zone;
   private JPanel jp;
   private int height_frame;
+  private JButton b_select;
+  BoutonListener blis=new BoutonListener();
+  private JTabbedPane onglets;
+  private JButton remplis;
+  private boolean remplissage=false;
+  private Color couleur;
+  private JColorChooser tcc;
+
 
   public Fenetre(Dessin dessin)
   {
@@ -35,8 +47,8 @@ public class Fenetre extends JFrame
     this.dessin=dessin;
     //this.getContentPane().add(new Vue (dessin));
     //this.getContentPane().setPreferredSize(600,400);
-    int f_width=600;
-    int f_height=400;
+    int f_width=800;
+    int f_height=600;
 
     this.setSize(f_width,f_height);
     /*
@@ -62,28 +74,49 @@ public class Fenetre extends JFrame
 
   public void initialise()
   {
-    this.setLayout(new BorderLayout());
-    initPanelSud();
-    this.add(jp,BorderLayout.SOUTH);
+    onglets=new JTabbedPane();
+
+    general=new JPanel();
+    general.setLayout(new BorderLayout());
+    initPanelNord();
+    general.add(jp,BorderLayout.NORTH);
+
     zone=new Vue(dessin);
-    this.add(zone,BorderLayout.CENTER);
-    height_frame=(int)this.getSize().getHeight();
     CurseurListener mlis=new CurseurListener();
-    this.addMouseListener(mlis);
+    zone.addMouseListener(mlis);
+
+    general.add(zone,BorderLayout.CENTER);
+
+    onglets.add("General",general);
+    onglets.add("Couleurs",initPanelDroite());
+
+    this.add(onglets);
   }
 
   public void actualiser()
   {
     zone=new Vue(dessin);
+    b_select.setBackground(null);
     //add(zone,BorderLayout.CENTER);
     repaint();
   }
 
-  public void initPanelSud()
+  public JPanel initPanelDroite()
+  {
+    JPanel couleurs=new JPanel();
+
+    tcc= new JColorChooser();
+    CouleurListener cl=new CouleurListener();
+    tcc.getSelectionModel().addChangeListener(cl);
+    tcc.setBorder(BorderFactory.createTitledBorder("Choisissez votre couleur"));
+    couleurs.add(tcc);
+    return couleurs;
+  }
+
+  public void initPanelNord()
   {
     jp=new JPanel();
     //addMouseListener(new MouseAdapter());
-    BoutonListener blis=new BoutonListener();
 
     JButton s=new JButton("Segment");
     s.addActionListener(blis);
@@ -104,10 +137,21 @@ public class Fenetre extends JFrame
     JButton e=new JButton("Ellipse");
     e.addActionListener(blis);
     jp.add(e);
+
+    remplis=new JButton("Remplissage");
+    remplis.addActionListener(blis);
+    jp.add(remplis);
+
+    JButton del=new JButton("Supprimer");
+    del.addActionListener(blis);
+    jp.add(del);
   }
 
   class CurseurListener extends MouseAdapter
   {
+    int pos_x;
+    int pos_y;
+    int rayon;
     public void mouseClicked(MouseEvent e)
     {
       if(forme!=null)
@@ -126,7 +170,18 @@ public class Fenetre extends JFrame
               first_clic=true;
             }else
             {
-              dessin.add(new Cercle(old_x,old_y,0,x-old_x,false));
+              pos_x=old_x;
+              pos_y=old_y;
+              rayon=Math.abs(x-old_x);
+              if(old_x>x)
+              {
+                pos_x=x;
+              }
+              if(old_y>y)
+              {
+                pos_y=y;
+              }
+              dessin.add(new Cercle(pos_x,pos_y,0,rayon,remplissage,couleur));
               forme=null;
               first_clic=false;
               actualiser();
@@ -143,9 +198,9 @@ public class Fenetre extends JFrame
             }else
             {
               //y=height_frame-y;
-              System.out.println("1) x="+old_x+" y="+old_y);
-              System.out.println("2) x="+x+" y="+y);
-              dessin.add(new Rectangle_mine(old_x,old_y,0,x,y,false));
+              //System.out.println("1) x="+old_x+" y="+old_y);
+              //System.out.println("2) x="+x+" y="+y);
+              dessin.add(new Rectangle_mine(old_x,old_y,0,x,y,remplissage,couleur));
               first_clic=false;
               forme=null;
               actualiser();
@@ -165,9 +220,9 @@ public class Fenetre extends JFrame
               second_clic=true;
             }else
             {
-              System.out.println(x+" "+y);
-              dessin.add(new Triangle(old_x,old_y,0,old_x_2,old_y_2,x,y,false));
-              System.out.println("Yeah");
+              //System.out.println(x+" "+y);
+              dessin.add(new Triangle(old_x,old_y,0,old_x_2,old_y_2,x,y,remplissage,couleur));
+              //System.out.println("Yeah");
               first_clic=false;
               second_clic=false;
               forme=null;
@@ -186,7 +241,7 @@ public class Fenetre extends JFrame
               rayon=x-old_x;
               rayon2=y-old_y;
 
-              dessin.add(new Ellipse(old_x,old_y,0,rayon,rayon2,false));
+              dessin.add(new Ellipse(old_x,old_y,0,rayon,rayon2,remplissage,couleur));
               first_clic=false;
               forme=null;
               actualiser();
@@ -201,7 +256,7 @@ public class Fenetre extends JFrame
               first_clic=true;
             }else
             {
-              dessin.add(new Segment(old_x,old_y,0,x,y));
+              dessin.add(new Segment(old_x,old_y,0,x,y,couleur));
               first_clic=false;
               forme=null;
               actualiser();
@@ -218,7 +273,48 @@ public class Fenetre extends JFrame
     public void actionPerformed(ActionEvent e)
     {
       String commande=e.getActionCommand();
-      forme=commande;
+      if(commande=="Remplissage")
+      {
+        if(remplissage)
+        {
+          remplissage=false;
+          remplis.setBackground(null);
+        }else
+        {
+          remplissage=true;
+          remplis.setBackground(couleur);
+        }
+      }else
+      {
+        if(b_select!=null)
+        {
+          b_select.setBackground(null);
+        }
+        b_select=(JButton)e.getSource();
+        b_select.setBackground(Color.RED);
+        forme=commande;
+      }
+
+      if(commande=="Supprimer")
+      {
+        while (!dessin.isEmpty())
+        {
+          dessin.remove(dessin.size()-1);
+        }
+        actualiser();
+      }
+    }
+  }
+
+  class CouleurListener implements ChangeListener
+  {
+    public void stateChanged(ChangeEvent cou)
+    {
+      couleur=tcc.getColor();
+      if(remplissage==true)
+      {
+        remplis.setBackground(couleur);
+      }
     }
   }
 

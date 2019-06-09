@@ -9,24 +9,35 @@ public class Dessin_Rectangle extends Dessin_Figure
 
   public void dessin(Graphics g,Figure fig)
   {
-    int x=fig.get_x();
-    int y=fig.get_y();
-    int width=fig.get_p().get_x()-x;
-    int height=fig.get_p().get_y()-y;
+    int x_1=fig.get_x();
+    int y_1=fig.get_y();
+    int x_2=fig.get_p().get_x();
+    int y_2=fig.get_p().get_y();
 
-    if(width<0)
+    int width=Math.abs(x_1-x_2);
+    int height=Math.abs(y_1-y_2);
+
+    int x=x_1;
+    int y=y_1;
+
+    if(x>x_2)
     {
-      int temp_x=x;
-      x=Math.abs(width);
-      width=temp_x;
+      x=x_2;
     }
-    if(height<0)
+    if(y>y_2)
     {
-      int temp_y=y;
-      y=Math.abs(height);
-      height=temp_y;
+      y=y_2;
     }
-    //System.out.pfintln("x="+x+" y="+y+" width="+width+" height="+height);
-    g.drawRect(x,y,width,height);
+
+    g.setColor(fig.get_color());
+
+    if(fig.get_plein())
+    {
+      g.fillRect(x,y,width,height);
+    }else
+    {
+      g.drawRect(x,y,width,height);
+    }
+
   }
 }
