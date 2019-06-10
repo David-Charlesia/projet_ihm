@@ -247,8 +247,16 @@ public class Fenetre extends JFrame
               first_clic=true;
             }else
             {
-              rayon=x-old_x;
-              rayon2=y-old_y;
+              rayon=Math.abs(x-old_x);
+              rayon2=Math.abs(y-old_y);
+              if(old_x>x)
+              {
+                old_x=x;
+              }
+              if(old_y>y)
+              {
+                old_y=y;
+              }
 
               dessin.add(new Ellipse(old_x,old_y,0,rayon,rayon2,remplissage,couleur));
               first_clic=false;
