@@ -9,6 +9,7 @@ import java.awt.event.*;
 import javax.swing.JOptionPane;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.JTabbedPane;
@@ -38,6 +39,7 @@ public class Fenetre extends JFrame
   private boolean remplissage=false;
   private Color couleur;
   private JColorChooser tcc;
+  private Crayon cray=new Crayon(0,0,0,couleur);
 
 
   public Fenetre(Dessin dessin)
@@ -84,6 +86,8 @@ public class Fenetre extends JFrame
     zone=new Vue(dessin);
     CurseurListener mlis=new CurseurListener();
     zone.addMouseListener(mlis);
+    MouveMouseListener mml=new MouveMouseListener();
+    zone.addMouseMotionListener(mml);
 
     general.add(zone,BorderLayout.CENTER);
 
@@ -138,6 +142,10 @@ public class Fenetre extends JFrame
     e.addActionListener(blis);
     jp.add(e);
 
+    JButton crayon=new JButton("Crayon");
+    crayon.addActionListener(blis);
+    jp.add(crayon);
+
     remplis=new JButton("Remplissage");
     remplis.addActionListener(blis);
     jp.add(remplis);
@@ -154,6 +162,7 @@ public class Fenetre extends JFrame
     int rayon;
     public void mouseClicked(MouseEvent e)
     {
+      System.out.println("Souris click !");
       if(forme!=null)
       {
         x=e.getX();
@@ -262,10 +271,42 @@ public class Fenetre extends JFrame
               actualiser();
             }
             break;
+          case "Crayon":
+            forme=null;
+            //cray.Crayon_add(null);
+            break;
         }
       }
 
     }
+  }
+
+  class MouveMouseListener implements MouseMotionListener
+  {
+    //Point pi;
+    java.awt.Point mp;
+    boolean ajouter=false;
+
+    public void mouseDragged(MouseEvent med)
+    {
+      if(forme=="Crayon")
+      {
+        if(!ajouter)
+        {
+          cray.set_color(couleur);
+          dessin.add(cray);
+          ajouter=true;
+        }
+        mp=med.getPoint();
+        //mp=pi.getLocation();
+        cray.Crayon_add(new Point((int)mp.getX(),(int)mp.getY()));
+        //cray.vue.dessin(g);
+        actualiser();
+      }
+    }
+    public void mouseMoved(MouseEvent med2){}
+
+    public void mouseExited(MouseEvent e){}
   }
 
   class BoutonListener implements ActionListener
@@ -292,6 +333,7 @@ public class Fenetre extends JFrame
         }
         b_select=(JButton)e.getSource();
         b_select.setBackground(Color.RED);
+        System.out.println(commande);
         forme=commande;
       }
 

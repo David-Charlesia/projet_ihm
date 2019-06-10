@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.io.*;
+import java.util.*;
+
 public class Figure
 {
   private double rotation;
@@ -63,6 +66,8 @@ public class Figure
       return null;
     }
   }
+
+  public ArrayList<Point> get_trace(){return null;}
 
   public void set_color(Color color)
   {
