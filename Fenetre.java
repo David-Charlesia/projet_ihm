@@ -46,7 +46,7 @@ public class Fenetre extends JFrame
   public Fenetre(Dessin dessin)
   {
     super("test");
-
+    this.requestFocus();
     this.dessin=dessin;
     this.setSize(800,600);
     this.initialise();
@@ -67,6 +67,7 @@ public class Fenetre extends JFrame
     initPanelSud();
     general.add(pannel_sud,BorderLayout.SOUTH);
 
+
     zone=new Vue(dessin);
     CurseurListener mlis=new CurseurListener();
     zone.addMouseListener(mlis);
@@ -74,6 +75,9 @@ public class Fenetre extends JFrame
     zone.addMouseMotionListener(mml);
 
     general.add(zone,BorderLayout.CENTER);
+
+    KeyListener klis=new ClavierListener();
+    general.addKeyListener(klis);
 
     onglets.add("General",general);
     onglets.add("Couleurs",initPanelDroite());
@@ -125,15 +129,15 @@ public class Fenetre extends JFrame
     JButton e=new JButton("Ellipse");
     e.addActionListener(blis);
     jp.add(e);
-
-    JButton crayon=new JButton("Crayon");
-    crayon.addActionListener(blis);
-    jp.add(crayon);
   }
 
   public void initPanelSud()
   {
     pannel_sud=new JPanel();
+
+    JButton crayon=new JButton("Crayon");
+    crayon.addActionListener(blis);
+    pannel_sud.add(crayon);
 
     remplis=new JButton("Remplissage");
     remplis.addActionListener(blis);
@@ -308,6 +312,53 @@ public class Fenetre extends JFrame
     public void mouseMoved(MouseEvent med2){}
 
     public void mouseExited(MouseEvent e){}
+  }
+
+  class ClavierListener implements KeyListener
+  {
+    public void keyReleased(KeyEvent e){System.out.println("keyReleased");System.out.println(e);}
+
+    public void keyTyped(KeyEvent e){System.out.println("type");System.out.println(e);}
+
+    public void keyPressed(KeyEvent e)
+    {
+      System.out.println(e);
+      System.out.println("press");
+      char touche=e.getKeyChar();
+      System.out.println(touche);
+      boolean ok=false;
+      switch(touche)
+      {
+        case 'c':
+          forme="Cercle";
+          System.out.println("Cercle press");
+          ok=true;
+
+        case 'r':
+          forme="Rectangle";
+          ok=true;
+
+        case 'e':
+          forme="Ellipse";
+          ok=true;
+
+        case 't':
+          forme="Triangle";
+          ok=true;
+
+        case 's':
+          forme="Segment";
+          ok=true;
+      }
+
+      if(ok)
+      {
+        if(b_select!=null)
+        {
+          b_select.setBackground(null);
+        }
+      }
+    }
   }
 
   class BoutonListener implements ActionListener
