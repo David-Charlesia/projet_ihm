@@ -30,7 +30,8 @@ public class Fenetre extends JFrame
   private int rayon;
   private int rayon2;
   private Vue zone;
-  private JPanel jp;
+  private JPanel jp; //panel nord
+  private JPanel pannel_sud;
   private JButton b_select;
   BoutonListener blis=new BoutonListener();
   private JTabbedPane onglets;
@@ -39,7 +40,8 @@ public class Fenetre extends JFrame
   private Color couleur;
   private JColorChooser tcc;
   private Crayon cray=new Crayon(0,0,0,couleur);
-
+  private Gomme gomme=new Gomme();
+  private int taille_gomme=50;
 
   public Fenetre(Dessin dessin)
   {
@@ -62,6 +64,9 @@ public class Fenetre extends JFrame
     initPanelNord();
     general.add(jp,BorderLayout.NORTH);
 
+    initPanelSud();
+    general.add(pannel_sud,BorderLayout.SOUTH);
+
     zone=new Vue(dessin);
     CurseurListener mlis=new CurseurListener();
     zone.addMouseListener(mlis);
@@ -74,6 +79,8 @@ public class Fenetre extends JFrame
     onglets.add("Couleurs",initPanelDroite());
 
     this.add(onglets);
+
+    dessin.add(gomme);
   }
 
   public void actualiser()
@@ -122,15 +129,26 @@ public class Fenetre extends JFrame
     JButton crayon=new JButton("Crayon");
     crayon.addActionListener(blis);
     jp.add(crayon);
+  }
+
+  public void initPanelSud()
+  {
+    pannel_sud=new JPanel();
 
     remplis=new JButton("Remplissage");
     remplis.addActionListener(blis);
-    jp.add(remplis);
+    pannel_sud.add(remplis);
 
     JButton del=new JButton("Supprimer");
     del.addActionListener(blis);
-    jp.add(del);
+    pannel_sud.add(del);
+
+    JButton gomme=new JButton("Gomme");
+    gomme.addActionListener(blis);
+    pannel_sud.add(gomme);
   }
+
+
 
   class CurseurListener extends MouseAdapter
   {
@@ -274,6 +292,16 @@ public class Fenetre extends JFrame
         }
         mp=med.getPoint();
         cray.Crayon_add(new Point((int)mp.getX(),(int)mp.getY()));
+        System.out.println("Cray");
+        dessin.add(cray);
+        actualiser();
+      }else if(forme=="Gomme")
+      {
+        mp=med.getPoint();
+        ArrayList<Cercle> gommes=new ArrayList<Cercle>();
+        gommes.add(new Cercle((int)mp.getX(),(int)mp.getY(),0,taille_gomme,true,null));
+        //gomme.Gomme_add((int)mp.getX(),(int)mp.getY(),taille_gomme);
+        dessin.add(new Gomme(gommes));
         actualiser();
       }
     }
@@ -325,6 +353,7 @@ public class Fenetre extends JFrame
     public void stateChanged(ChangeEvent cou)
     {
       couleur=tcc.getColor();
+      System.out.println(couleur);
       if(remplissage==true)
       {
         remplis.setBackground(couleur);

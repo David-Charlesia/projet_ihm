@@ -69,6 +69,8 @@ public class Figure
 
   public ArrayList<Point> get_trace(){return null;}
 
+  public ArrayList<Cercle> get_gommes(){return null;}
+
   public void set_color(Color color)
   {
     this.color=color;
