@@ -18,6 +18,11 @@ public class Dessin_Crayon extends Dessin_Figure
 
     while(itep.hasNext())
     {
+      if(p2==null)
+      {
+        p1=itep.next();
+        p2=p1;
+      }
       g.drawLine(p1.get_x(),p1.get_y(),p2.get_x(),p2.get_y());
       p1=p2;
       p2=itep.next();

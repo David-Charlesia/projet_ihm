@@ -31,7 +31,6 @@ public class Fenetre extends JFrame
   private int rayon2;
   private Vue zone;
   private JPanel jp;
-  private int height_frame;
   private JButton b_select;
   BoutonListener blis=new BoutonListener();
   private JTabbedPane onglets;
@@ -47,27 +46,7 @@ public class Fenetre extends JFrame
     super("test");
 
     this.dessin=dessin;
-    //this.getContentPane().add(new Vue (dessin));
-    //this.getContentPane().setPreferredSize(600,400);
-    int f_width=800;
-    int f_height=600;
-
-    this.setSize(f_width,f_height);
-    /*
-    Dimension actualSize = this.getContentPane().getSize();
-
-    int extraW = f_width - actualSize.width;
-    int extraH = f_height - actualSize.height;
-
-    // Now set the size.
-    this.setSize(f_width + extraW, f_height + extraH);
-
-    System.out.println(f_width+" "+f_height);
-    System.out.println(extraW+" "+extraH);
-    System.out.println(f_width + extraW+" "+f_height + extraH);
-    */
-
-    //this.pack();
+    this.setSize(800,600);
     this.initialise();
     this.setVisible(true);
     this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -101,7 +80,6 @@ public class Fenetre extends JFrame
   {
     zone=new Vue(dessin);
     b_select.setBackground(null);
-    //add(zone,BorderLayout.CENTER);
     repaint();
   }
 
@@ -119,8 +97,7 @@ public class Fenetre extends JFrame
 
   public void initPanelNord()
   {
-    jp=new JPanel();
-    //addMouseListener(new MouseAdapter());
+    jp=new JPanel();;
 
     JButton s=new JButton("Segment");
     s.addActionListener(blis);
@@ -162,16 +139,13 @@ public class Fenetre extends JFrame
     int rayon;
     public void mouseClicked(MouseEvent e)
     {
-      System.out.println("Souris click !");
       if(forme!=null)
       {
         x=e.getX();
         y=e.getY();
-        //System.out.println(x+","+y);
         switch(forme)
         {
           case "Cercle":
-          //get info rayon popup
             if(!first_clic)
             {
               old_x=x;
@@ -202,13 +176,9 @@ public class Fenetre extends JFrame
             {
               old_x=x;
               old_y=y;
-              //old_y=height_frame-y;
               first_clic=true;
             }else
             {
-              //y=height_frame-y;
-              //System.out.println("1) x="+old_x+" y="+old_y);
-              //System.out.println("2) x="+x+" y="+y);
               dessin.add(new Rectangle_mine(old_x,old_y,0,x,y,remplissage,couleur));
               first_clic=false;
               forme=null;
@@ -229,9 +199,7 @@ public class Fenetre extends JFrame
               second_clic=true;
             }else
             {
-              //System.out.println(x+" "+y);
               dessin.add(new Triangle(old_x,old_y,0,old_x_2,old_y_2,x,y,remplissage,couleur));
-              //System.out.println("Yeah");
               first_clic=false;
               second_clic=false;
               forme=null;
@@ -281,7 +249,7 @@ public class Fenetre extends JFrame
             break;
           case "Crayon":
             forme=null;
-            //cray.Crayon_add(null);
+            cray.Crayon_add(null);
             break;
         }
       }
@@ -291,7 +259,6 @@ public class Fenetre extends JFrame
 
   class MouveMouseListener implements MouseMotionListener
   {
-    //Point pi;
     java.awt.Point mp;
     boolean ajouter=false;
 
@@ -306,9 +273,7 @@ public class Fenetre extends JFrame
           ajouter=true;
         }
         mp=med.getPoint();
-        //mp=pi.getLocation();
         cray.Crayon_add(new Point((int)mp.getX(),(int)mp.getY()));
-        //cray.vue.dessin(g);
         actualiser();
       }
     }
@@ -341,7 +306,6 @@ public class Fenetre extends JFrame
         }
         b_select=(JButton)e.getSource();
         b_select.setBackground(Color.RED);
-        System.out.println(commande);
         forme=commande;
       }
 
