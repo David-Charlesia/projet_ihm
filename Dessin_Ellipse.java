@@ -9,7 +9,6 @@ public class Dessin_Ellipse extends Dessin_Figure
 
   public void dessin(Graphics g,Figure fig)
   {
-    System.out.println(fig.get_rayon());
     g.setColor(fig.get_color());
     if(fig.get_plein())
     {

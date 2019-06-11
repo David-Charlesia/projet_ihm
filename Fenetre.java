@@ -296,7 +296,6 @@ public class Fenetre extends JFrame
         }
         mp=med.getPoint();
         cray.Crayon_add(new Point((int)mp.getX(),(int)mp.getY()));
-        System.out.println("Cray");
         dessin.add(cray);
         actualiser();
       }else if(forme=="Gomme")
@@ -404,7 +403,6 @@ public class Fenetre extends JFrame
     public void stateChanged(ChangeEvent cou)
     {
       couleur=tcc.getColor();
-      System.out.println(couleur);
       if(remplissage==true)
       {
         remplis.setBackground(couleur);
