@@ -67,6 +67,8 @@ public class Figure
     }
   }
 
+  public String get_text(){return null;}
+
   public ArrayList<Point> get_trace(){return null;}
 
   public ArrayList<Cercle> get_gommes(){return null;}

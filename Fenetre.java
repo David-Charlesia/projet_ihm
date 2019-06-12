@@ -42,11 +42,17 @@ public class Fenetre extends JFrame
   private Crayon cray=new Crayon(0,0,0,couleur);
   private Gomme gomme=new Gomme();
   private int taille_gomme=50;
+  private JPanel panel_text;
+  private JTextArea texte;
+  private String text2;
 
   public Fenetre(Dessin dessin)
   {
     super("test");
-    this.requestFocus();
+    //KeyListener klis=new ClavierListener();
+    //this.addKeyListener(klis);
+    //this.setFocusable(true);
+    //this.requestFocus();
     this.dessin=dessin;
     this.setSize(800,600);
     this.initialise();
@@ -76,10 +82,11 @@ public class Fenetre extends JFrame
 
     general.add(zone,BorderLayout.CENTER);
 
-    KeyListener klis=new ClavierListener();
-    general.addKeyListener(klis);
+
+    initPanelText();
 
     onglets.add("General",general);
+    onglets.add("Texte",panel_text);
     onglets.add("Couleurs",initPanelDroite());
 
     this.add(onglets);
@@ -92,6 +99,20 @@ public class Fenetre extends JFrame
     zone=new Vue(dessin);
     b_select.setBackground(null);
     repaint();
+  }
+
+  public void initPanelText()
+  {
+    panel_text=new JPanel();
+    panel_text.setLayout(new BorderLayout());
+
+    JButton text=new JButton("Valider");
+    text.addActionListener(blis);
+
+    texte=new JTextArea();
+    panel_text.add(texte,BorderLayout.CENTER);
+
+    panel_text.add(text,BorderLayout.SOUTH);
   }
 
   public JPanel initPanelDroite()
@@ -273,6 +294,12 @@ public class Fenetre extends JFrame
             forme=null;
             cray.Crayon_add(null);
             break;
+
+          case "Texte":
+            forme=null;
+            dessin.add(new Texte(x,y,couleur,text2));
+            actualiser();
+            break;
         }
       }
 
@@ -313,22 +340,21 @@ public class Fenetre extends JFrame
     public void mouseExited(MouseEvent e){}
   }
 
-  class ClavierListener implements KeyListener
+  /*class ClavierListener implements KeyListener
   {
-    public void keyReleased(KeyEvent e){System.out.println("keyReleased");System.out.println(e);}
+    public void keyReleased(KeyEvent e){}
 
-    public void keyTyped(KeyEvent e){System.out.println("type");System.out.println(e);}
+    public void keyTyped(KeyEvent e){}
 
     public void keyPressed(KeyEvent e)
     {
-      System.out.println(e);
       System.out.println("press");
-      char touche=e.getKeyChar();
+      int touche=e.getKeyCode();
       System.out.println(touche);
       boolean ok=false;
       switch(touche)
       {
-        case 'c':
+        case KeyEvent.VK_C:
           forme="Cercle";
           System.out.println("Cercle press");
           ok=true;
@@ -354,11 +380,11 @@ public class Fenetre extends JFrame
       {
         if(b_select!=null)
         {
-          b_select.setBackground(null);
+          //b_select.setBackground(null);
         }
       }
     }
-  }
+  }*/
 
   class BoutonListener implements ActionListener
   {
@@ -394,6 +420,12 @@ public class Fenetre extends JFrame
           dessin.remove(dessin.size()-1);
         }
         actualiser();
+      }
+
+      if(commande=="Valider")
+      {
+        text2=texte.getText();
+        forme="Texte";
       }
     }
   }
